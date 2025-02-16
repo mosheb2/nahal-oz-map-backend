@@ -45,12 +45,12 @@
 }
 
 .marker-campaign {
-    display: none;
+    /*display: none;*/
     position: absolute;
     z-index: 1;
-    left: -20px;
-    bottom: 10px;
-    opacity: 0;
+    left: 20px;
+    bottom: 20px;
+    /*opacity: 0;*/
 }
 
 .marker-campaign.bottom {
@@ -69,5 +69,5 @@
 
 .map-marker:hover .marker-campaign {
     display: block;
-    animation: fadeIn 0.2s ease-in-out forwards;
+    /*animation: fadeIn 0.2s ease-in-out forwards;*/
 }

@@ -18,6 +18,7 @@ const locationSchema = new mongoose.Schema({
     },
     target: {
         type: Number,
+
         required: true,
         min: 0,
     },

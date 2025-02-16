@@ -16,7 +16,12 @@ const locationSchema = new mongoose.Schema({
         required: true,
         enum: ['sqft', 'sqm', 'acres', 'hectares']
     },
-    target: {
+    categoryName: {
+        type: String,
+        required: true,
+        enum: ['all', 'youth', 'agriculture', 'community','education']
+    },
+    target:{
         type: Number,
 
         required: true,

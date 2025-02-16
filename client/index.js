@@ -1,51 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Drawer, TextField, Button, Typography, Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import axios from "axios";
 
 const PASSWORD = "yourpassword";
 
 const TableHeader = styled(TableHead)({
     backgroundColor: "#f5f5f5",
 });
-
-const MOCK_LOCATIONS = [
-    {
-        _id: "67b1ce289d01b04a0cf702c5",
-        size: 15,
-        sizeUnit: "sqft",
-        target: 50000,
-        raisedAmount: 0,
-        targetCurrency: "USD",
-        details: "Some new text",
-        coordinates: { x: 40.7128, y: 74.006 },
-        imagesUrl: ["https://example.com/image1.jpg", "https://example.com/image2.jpg"],
-        deleted: false
-    },
-    {
-        _id: "67b1ce289d01b04a0cf702b3",
-        size: 300,
-        sizeUnit: "sqft",
-        target: 1000000,
-        raisedAmount: 55555,
-        targetCurrency: "USD",
-        details: "The new lookout",
-        coordinates: { x: 30, y: 55 },
-        imagesUrl: ["https://example.com/image1.jpg", "https://example.com/image2.jpg"],
-        deleted: false
-    },
-    {
-        _id: "67b1cbb289d21b04a0cf702b3",
-        size: 273,
-        sizeUnit: "sqft",
-        target: 33500,
-        raisedAmount: 23400,
-        targetCurrency: "USD",
-        details: "the new youth center",
-        coordinates: { x: 20, y: 91 },
-        imagesUrl: ["https://example.com/image1.jpg", "https://example.com/image2.jpg"],
-        deleted: false
-    }
-];
 
 const EMPTY_LOCATION = {
     _id: null,
@@ -64,9 +26,22 @@ const ProtectedPage = () => {
     const [authenticated, setAuthenticated] = useState(false);
     const [passwordInput, setPasswordInput] = useState("");
     const [error, setError] = useState("");
-    const [locations, setLocations] = useState(MOCK_LOCATIONS);
+    const [locations, setLocations] = useState([]);
     const [selectedLocation, setSelectedLocation] = useState(null);
     const [isNew, setIsNew] = useState(false);
+
+    useEffect(() => {
+        fetchLocations();
+    }, []);
+
+    const fetchLocations = async () => {
+        try {
+            const response = await axios.get("/api/locations");
+            setLocations(response.data);
+        } catch (err) {
+            console.error("Error fetching locations:", err);
+        }
+    };
 
     const handlePasswordSubmit = () => {
         if (passwordInput === PASSWORD) {
@@ -100,13 +75,23 @@ const ProtectedPage = () => {
     };
 
     const handleUpdateLocation = async () => {
-        alert(`Mock update for location: ${selectedLocation._id}`);
+        try {
+            await axios.put(`/api/locations/${selectedLocation._id}`, selectedLocation);
+            fetchLocations();
+            setSelectedLocation(null);
+        } catch (err) {
+            console.error("Error updating location:", err);
+        }
     };
 
     const handleCreateLocation = async () => {
-        alert(`Mock create location: ${JSON.stringify(selectedLocation, null, 2)}`);
-        setLocations([...locations, { ...selectedLocation, _id: `new-${Date.now()}` }]);
-        setSelectedLocation(null);
+        try {
+            const response = await axios.post("/api/locations", selectedLocation);
+            setLocations([...locations, response.data]);
+            setSelectedLocation(null);
+        } catch (err) {
+            console.error("Error creating location:", err);
+        }
     };
 
     const handleAddLocation = () => {

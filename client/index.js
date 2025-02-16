@@ -47,12 +47,26 @@ const MOCK_LOCATIONS = [
     }
 ];
 
+const EMPTY_LOCATION = {
+    _id: null,
+    size: "",
+    sizeUnit: "sqft",
+    target: "",
+    raisedAmount: 0,
+    targetCurrency: "USD",
+    details: "",
+    coordinates: { x: "", y: "" },
+    imagesUrl: [],
+    deleted: false
+};
+
 const ProtectedPage = () => {
     const [authenticated, setAuthenticated] = useState(false);
     const [passwordInput, setPasswordInput] = useState("");
     const [error, setError] = useState("");
     const [locations, setLocations] = useState(MOCK_LOCATIONS);
     const [selectedLocation, setSelectedLocation] = useState(null);
+    const [isNew, setIsNew] = useState(false);
 
     const handlePasswordSubmit = () => {
         if (passwordInput === PASSWORD) {
@@ -64,16 +78,40 @@ const ProtectedPage = () => {
     };
 
     const handleRowClick = (location) => {
-        console.log("Clicked location:", location);
         setSelectedLocation(location);
+        setIsNew(false);
     };
 
     const handleInputChange = (key, value) => {
-        setSelectedLocation({ ...selectedLocation, [key]: value });
+        setSelectedLocation((prev) => ({
+            ...prev,
+            [key]: key === "imagesUrl" ? value.split("\n") : value
+        }));
     };
 
-    const handleUpdateLocation = () => {
+    const handleCoordinateChange = (axis, value) => {
+        setSelectedLocation((prev) => ({
+            ...prev,
+            coordinates: {
+                ...prev.coordinates,
+                [axis]: value
+            }
+        }));
+    };
+
+    const handleUpdateLocation = async () => {
         alert(`Mock update for location: ${selectedLocation._id}`);
+    };
+
+    const handleCreateLocation = async () => {
+        alert(`Mock create location: ${JSON.stringify(selectedLocation, null, 2)}`);
+        setLocations([...locations, { ...selectedLocation, _id: `new-${Date.now()}` }]);
+        setSelectedLocation(null);
+    };
+
+    const handleAddLocation = () => {
+        setSelectedLocation(EMPTY_LOCATION);
+        setIsNew(true);
     };
 
     if (!authenticated) {
@@ -125,10 +163,17 @@ const ProtectedPage = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
+
+            <Box display="flex" justifyContent="center" marginTop={2}>
+                <Button variant="contained" color="primary" onClick={handleAddLocation}>
+                    Add Location
+                </Button>
+            </Box>
+
             <Drawer anchor="right" open={Boolean(selectedLocation)} onClose={() => setSelectedLocation(null)}>
                 {selectedLocation && (
                     <div style={{ width: "450px", padding: "20px" }}>
-                        <Typography variant="h6">Edit Location</Typography>
+                        <Typography variant="h6">{isNew ? "Create New Location" : "Edit Location"}</Typography>
                         <TextField
                             label="Details"
                             fullWidth
@@ -138,39 +183,73 @@ const ProtectedPage = () => {
                             margin="normal"
                         />
                         <TextField
+                            label="Size"
+                            fullWidth
+                            type="number"
+                            value={selectedLocation.size}
+                            onChange={(e) => handleInputChange("size", e.target.value)}
+                            margin="normal"
+                        />
+                        <TextField
+                            label="Size Unit"
+                            fullWidth
+                            value={selectedLocation.sizeUnit}
+                            onChange={(e) => handleInputChange("sizeUnit", e.target.value)}
+                            margin="normal"
+                        />
+                        <TextField
+                            label="Target"
+                            fullWidth
+                            type="number"
+                            value={selectedLocation.target}
+                            onChange={(e) => handleInputChange("target", e.target.value)}
+                            margin="normal"
+                        />
+                        <TextField
+                            label="Raised Amount"
+                            fullWidth
+                            type="number"
+                            value={selectedLocation.raisedAmount}
+                            onChange={(e) => handleInputChange("raisedAmount", e.target.value)}
+                            margin="normal"
+                        />
+                        <TextField
+                            label="Target Currency"
+                            fullWidth
+                            value={selectedLocation.targetCurrency}
+                            onChange={(e) => handleInputChange("targetCurrency", e.target.value)}
+                            margin="normal"
+                        />
+                        <TextField
                             label="Coordinate X"
                             fullWidth
                             value={selectedLocation.coordinates.x}
-                            onChange={(e) => handleInputChange("coordinates.x", e.target.value)}
+                            onChange={(e) => handleCoordinateChange("x", e.target.value)}
                             margin="normal"
                         />
                         <TextField
                             label="Coordinate Y"
                             fullWidth
                             value={selectedLocation.coordinates.y}
-                            onChange={(e) => handleInputChange("coordinates.y", e.target.value)}
+                            onChange={(e) => handleCoordinateChange("y", e.target.value)}
                             margin="normal"
                         />
-                        {Object.keys(selectedLocation).map((key) => (
-                            key !== "_id" && key !== "__v" && key !== "createdAt" && key !== "updatedAt" && key !== "details" && key !== "coordinates" && (
-                                <TextField
-                                    key={key}
-                                    label={key}
-                                    fullWidth
-                                    value={key === "imagesUrl" ? selectedLocation[key].join("\n") : selectedLocation[key]}
-                                    onChange={(e) => handleInputChange(key, key === "imagesUrl" ? e.target.value.split("\n") : e.target.value)}
-                                    margin="normal"
-                                    multiline={key === "imagesUrl"}
-                                />
-                            )
-                        ))}
+                        <TextField
+                            label="Images URLs (one per line)"
+                            fullWidth
+                            multiline
+                            value={selectedLocation.imagesUrl.join("\n")}
+                            onChange={(e) => handleInputChange("imagesUrl", e.target.value)}
+                            margin="normal"
+                        />
+
                         <Button
                             variant="contained"
                             color="primary"
-                            onClick={handleUpdateLocation}
+                            onClick={isNew ? handleCreateLocation : handleUpdateLocation}
                             style={{ marginTop: "10px" }}
                         >
-                            Update Location
+                            {isNew ? "Create Location" : "Update Location"}
                         </Button>
                     </div>
                 )}

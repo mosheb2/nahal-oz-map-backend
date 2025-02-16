@@ -67,7 +67,6 @@ const updateRaisedAmount = async (req, res) => {
 
 const updateLocation = async (req,res) => {
     const { locationId } = req.params;
-
     const { size, sizeUnit, target, details, coordinates, imagesUrl, targetCurrency } = req.body;
 
     const location = {
@@ -87,7 +86,6 @@ const updateLocation = async (req,res) => {
     }
 
     res.status(500).send({message: "Location could not be updated"});
-
 }
 
 

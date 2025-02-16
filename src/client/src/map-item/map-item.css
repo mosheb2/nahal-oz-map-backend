@@ -1,0 +1,117 @@
+
+.project-card {
+    width: 516px; /* Set a fixed height for the card */
+    border-radius: 30px;
+    border: 2px solid #FFFEF3;
+    padding: 30px 30px;
+    background-color: #333333;
+    isolation: isolate;
+    box-shadow: 0 14px 60px rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #FFFFFF;
+    text-align: left;
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.project-card h2 {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 31px;
+    line-height: 36px;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+
+p.description {
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.raised {
+    margin-top: 15px;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 28px;
+
+    color: #FFFEF3;
+}
+
+.budget-goal {
+    margin-top: 3px;
+    color: #959595;
+}
+
+.budget-goal .dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 3px;
+    background: #959595;
+    margin: 2px 3px 2px 5px;
+}
+
+.progress-bar {
+    margin-top: 10px;
+}
+
+.img-container {
+    margin-top: 10px;
+    border-radius: 8px;
+}
+
+.card-footer {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-top: 15px;
+}
+
+
+button.cta {
+    background-color: #FFE971; /* Green */
+    border: none;
+    color: black;
+    padding: 12px 22px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    height: 40px;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 17px;
+    border-radius: 20px;
+    margin-left: 6px;
+
+}
+
+button.cta.black-cta {
+    padding: 10px 22px;
+    background: #333333;
+    border: 2px solid #FFFEF3;
+    color: white;
+}
+
+.donate {
+    background: #FFE971;
+    border-radius: 40px;
+}
+
+.donate-text {
+}

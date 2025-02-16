@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import './index.css';
 
-import hotspots, { Hotspot } from "./data/hotspots";
-import {InteractiveMap} from "./components/map/InteractiveMap";
+import hotspots, { Hotspot } from './data/hotspots';
+import {InteractiveMap} from './components/map/InteractiveMap';
 
 
 // A type for our hotspots

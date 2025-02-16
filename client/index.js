@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Drawer, TextField, Button, Typography } from "@mui/material";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Drawer, TextField, Button, Typography, Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 const PASSWORD = "yourpassword";
@@ -77,17 +77,17 @@ const ProtectedPage = () => {
         return (
             <div style={{ textAlign: "center", marginTop: "50px" }}>
                 <Typography variant="h5">Enter Password</Typography>
-                <div>
+                <Box display="flex" justifyContent="center" alignItems="center" gap={2} marginTop={2}>
                     <TextField
                         type="password"
                         value={passwordInput}
                         onChange={(e) => setPasswordInput(e.target.value)}
-                        style={{ margin: "10px", width: "200px", height: "40px" }}
+                        style={{ width: "200px" }}
                     />
-                    <Button variant="contained" onClick={handlePasswordSubmit} style={{ width: "200px", height: "40px" }}>
+                    <Button variant="contained" onClick={handlePasswordSubmit} style={{ width: "200px" }}>
                         Submit
                     </Button>
-                </div>
+                </Box>
             </div>
         );
     }

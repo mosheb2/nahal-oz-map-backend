@@ -3,7 +3,7 @@ const app = require('./app');
 const mongoose = require('mongoose');
 
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://admin:secret@localhost:27017/locations?retryWrites=true&loadBalanced=false&connectTimeoutMS=10000&authSource=admin&authMechanism=SCRAM-SHA-1';
-//test124
+//test
 
 
 const connectDB = async () => {

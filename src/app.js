@@ -9,11 +9,9 @@ const locationRoutes = require('./routes/locationRoutes');
 app.use(express.json());
 app.use(cors());
 app.use('/api/locations', locationRoutes);
-app.use(express.static(path.join(__dirname, 'client')));
 
-app.get('/dist.js', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client', 'dist.js'));
-});
+app.use('/assets',express.static(path.join(__dirname, 'public')));
+
 
 app.get('/', (req,res)=> {
     res.send('Server is running');

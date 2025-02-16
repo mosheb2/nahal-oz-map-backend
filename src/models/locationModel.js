@@ -26,6 +26,10 @@ const locationSchema = new mongoose.Schema({
         type: Number,
         default: 0, //TODO: should be always lower or equal to target
     },
+    title: {
+        type: String,
+        required: true,
+    },
     targetCurrency: {
         type: String,
         required: true,

@@ -13,4 +13,9 @@ app.get('/', (req,res)=> {
     res.send('Server is running');
 })
 
+app.use((err, req, res, next) => {
+    console.error(err);  // Log the error for debugging
+    res.status(500).json({ message: 'Something went wrong!' });
+});
+
 module.exports = app;

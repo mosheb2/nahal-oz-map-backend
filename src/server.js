@@ -7,10 +7,7 @@ const MONGO_URI = process.env.MONGO_URI || 'mongodb://admin:secret@localhost:270
 
 
 const connectDB = async () => {
-    await mongoose.connect(MONGO_URI, {
-        // useNewUrlParser: true,
-        // useUnifiedTopology: true,
-    })}
+    await mongoose.connect(MONGO_URI, {})}
 
 async function main() {
     try {

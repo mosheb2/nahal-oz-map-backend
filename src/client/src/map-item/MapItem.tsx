@@ -1,6 +1,7 @@
-import React from "react";
-import {Hotspot} from "../data/hotspots";
-import {Button, Grid2 as Grid} from "@mui/material";
+import React from 'react';
+import './map-item.css';
+import { Hotspot } from '../data/hotspots';
+import { Button, Grid2 as Grid } from '@mui/material';
 
 const getPic = (pics: string[]) => {
     if (pics.length > 0) {

@@ -1,0 +1,6 @@
+name = "nahal-oz-app"
+type = "javascript"
+account_id = "d75332d7397885d9d081b3cbc7a9b3bd"
+
+[vars]
+REDIRECT_URI = "https://nahal-oz-map-backend.moshe-bareket.workers.dev/callback"

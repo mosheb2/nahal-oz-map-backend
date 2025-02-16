@@ -11,12 +11,13 @@ const TableHeader = styled(TableHead)({
 
 const EMPTY_LOCATION = {
     _id: null,
+    title: "",
+    details: "",
     size: "",
     sizeUnit: "sqft",
     target: "",
     raisedAmount: 0,
     targetCurrency: "USD",
-    details: "",
     coordinates: { x: "", y: "" },
     imagesUrl: [],
     deleted: false
@@ -140,6 +141,7 @@ const ProtectedPage = () => {
                                 style={{ cursor: "pointer" }}
                                 hover
                             >
+                                <TableCell>{location.title}</TableCell>
                                 <TableCell>{location.details}</TableCell>
                                 <TableCell>{location.raisedAmount} {location.targetCurrency}</TableCell>
                                 <TableCell>{location.target} {location.targetCurrency}</TableCell>
@@ -159,6 +161,14 @@ const ProtectedPage = () => {
                 {selectedLocation && (
                     <div style={{ width: "450px", padding: "20px" }}>
                         <Typography variant="h6">{isNew ? "Create New Location" : "Edit Location"}</Typography>
+                        <TextField
+                            label="Title"
+                            fullWidth
+                            multiline
+                            value={selectedLocation.title}
+                            onChange={(e) => handleInputChange("title", e.target.value)}
+                            margin="normal"
+                        />
                         <TextField
                             label="Details"
                             fullWidth

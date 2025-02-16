@@ -50,18 +50,21 @@ const MOCK_LOCATIONS = [
 const ProtectedPage = () => {
     const [authenticated, setAuthenticated] = useState(false);
     const [passwordInput, setPasswordInput] = useState("");
+    const [error, setError] = useState("");
     const [locations, setLocations] = useState(MOCK_LOCATIONS);
     const [selectedLocation, setSelectedLocation] = useState(null);
 
     const handlePasswordSubmit = () => {
         if (passwordInput === PASSWORD) {
+            setError("");
             setAuthenticated(true);
         } else {
-            alert("Incorrect password");
+            setError("Incorrect password, please try again.");
         }
     };
 
     const handleRowClick = (location) => {
+        console.log("Clicked location:", location);
         setSelectedLocation(location);
     };
 
@@ -77,11 +80,13 @@ const ProtectedPage = () => {
         return (
             <div style={{ textAlign: "center", marginTop: "50px" }}>
                 <Typography variant="h5">Enter Password</Typography>
-                <Box display="flex" justifyContent="center" alignItems="center" gap={2} marginTop={2}>
+                <Box display="flex" flexDirection="column" alignItems="center" gap={2} marginTop={2}>
                     <TextField
                         type="password"
                         value={passwordInput}
                         onChange={(e) => setPasswordInput(e.target.value)}
+                        error={Boolean(error)}
+                        helperText={error}
                         style={{ width: "200px" }}
                     />
                     <Button variant="contained" onClick={handlePasswordSubmit} style={{ width: "200px" }}>
@@ -106,7 +111,12 @@ const ProtectedPage = () => {
                     </TableHeader>
                     <TableBody>
                         {locations.map((location) => (
-                            <TableRow key={location._id} onClick={() => handleRowClick(location)} style={{ cursor: "pointer" }}>
+                            <TableRow 
+                                key={location._id} 
+                                onClick={() => handleRowClick(location)} 
+                                style={{ cursor: "pointer" }}
+                                hover
+                            >
                                 <TableCell>{location.details}</TableCell>
                                 <TableCell>{location.raisedAmount} {location.targetCurrency}</TableCell>
                                 <TableCell>{location.target} {location.targetCurrency}</TableCell>

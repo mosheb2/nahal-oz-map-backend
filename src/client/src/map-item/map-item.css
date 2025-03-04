@@ -42,6 +42,12 @@
 p.description {
     margin-top: 0;
     margin-bottom: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 21em;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
 }
 
 .raised {

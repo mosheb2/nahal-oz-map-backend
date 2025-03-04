@@ -12,7 +12,7 @@ export function InteractiveMap ({ projects }:{ projects:Hotspot[]} ) {
                 <img className="map-bg" src={mapImage} alt="Map Image"/>
                     {projects.map((proj: Hotspot) => {
                         return (
-                            <div className="map-marker" style={{top: `${proj.coordinates.x}%`, left: `${proj.coordinates.x}%`}}>
+                            <div key={proj._id} className="map-marker" style={{top: `${proj.coordinates.y}%`, left: `${proj.coordinates.x}%`}}>
                                 <div className="marker-campaign bottom">
                                     <MapItem {...proj}/>
                                 </div>

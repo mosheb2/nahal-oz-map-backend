@@ -8,7 +8,7 @@ export interface Hotspot {
     _id: string;
     details: string,
     title: string,
-    imagesUrl: [string],
+    coverImagesUrl: string,
     coordinates: {
         x: number,
         y: number
@@ -26,7 +26,7 @@ export default {
             _id: p._id,
             details: p.details,
             title: p.title,
-            imagesUrl: p.imagesUrl,
+            coverImagesUrl: p.coverImagesUrl,
             coordinates: p.coordinates,
             raisedAmount: p.raisedAmount,
             target: p.target,

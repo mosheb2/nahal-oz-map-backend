@@ -1,7 +1,7 @@
 const locationService = require('../services/locationService');
 
 const addLocation = async (req,res) => {
-    const { size, sizeUnit, target, details, coordinates, imagesUrl, targetCurrency, title, raisedAmount, categoryName } = req.body;
+    const { size, sizeUnit, target, details, coordinates, coverImagesUrl, targetCurrency, title, raisedAmount, categoryName } = req.body;
 
     const location = {
         title,
@@ -12,7 +12,7 @@ const addLocation = async (req,res) => {
         raisedAmount,
         details,
         coordinates,
-        imagesUrl,
+        coverImagesUrl,
         categoryName
     }
 
@@ -70,7 +70,7 @@ const updateRaisedAmount = async (req, res) => {
 
 const updateLocation = async (req,res) => {
     const { locationId } = req.params;
-    const { size, sizeUnit, target, details, coordinates, imagesUrl, targetCurrency, title, raisedAmount, categoryName } = req.body;
+    const { size, sizeUnit, target, details, coordinates, coverImagesUrl, targetCurrency, title, raisedAmount, categoryName } = req.body;
 
     const location = {
         title,
@@ -80,7 +80,7 @@ const updateLocation = async (req,res) => {
         targetCurrency,
         details,
         coordinates,
-        imagesUrl,
+        coverImagesUrl,
         raisedAmount,
         categoryName
     }

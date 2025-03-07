@@ -1,6 +1,6 @@
 import React from 'react';
 import './map-item.css';
-import { Hotspot } from '../data/hotspots';
+import { Hotspot } from '../../data/hotspots';
 
 const PROGRESS_WIDTH = 456;
 

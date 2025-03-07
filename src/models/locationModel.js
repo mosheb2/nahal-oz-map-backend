@@ -45,9 +45,7 @@ const locationSchema = new mongoose.Schema({
         required: true
     },
     coordinates: { type: coordinatesSchema, required: true },
-    imagesUrl: [{
-        type: String
-    }],
+    coverImagesUrl: { type: String, required: true },
     deleted: {
         type: Boolean,
         default: false,

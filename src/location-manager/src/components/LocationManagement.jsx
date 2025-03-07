@@ -14,6 +14,8 @@ import {
 import { Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import axios from 'axios'
 
+const API_URL = `${import.meta.env.VITE_API_URL || 'https://api.standwithnahaloz.com'}/api/locations`;
+
 const LocationManagement = () => {
     const categories = ['all', 'youth', 'agriculture', 'community','education'];
 
@@ -30,14 +32,14 @@ const LocationManagement = () => {
         title: '',
         details: '',
         coordinates: { x: '', y: '' },
-        imagesUrl: ['']
+        coverImagesUrl: ''
     });
 
     useEffect(() => {
         // Simulated API call to fetch properties
         const fetchLocations = async () => {
             try {
-               const res=  await axios.get('https://api.standwithnahaloz.com/api/locations')
+               const res=  await axios.get(API_URL)
                 const locations = res?.data?.locations || [];
 
                 setLocations(locations);
@@ -60,24 +62,35 @@ const LocationManagement = () => {
                     [coordKey]: value
                 }
             }));
-        } else {
+
+            return;
+        }
+
+        if(name.startsWith('image')) {
             setFormData(prev => ({
                 ...prev,
-                [name]: value
+                imageUrl: value
             }));
+
+            return;
         }
+
+        setFormData(prev => ({
+            ...prev,
+            [name]: value
+        }));
     };
 
     const handleSubmit = async () => {
         try {
             if (currentLocation) {
-                await axios.put(`https://api.standwithnahaloz.com/api/locations/${currentLocation._id}`, formData)
+                await axios.put(`${API_URL}/${currentLocation._id}`, formData)
 
                 setLocations(prev =>
                     prev.map(p => p === currentLocation ? { ...formData } : p)
                 );
             } else {
-                await axios.post('https://api.standwithnahaloz.com/api/locations', formData)
+                await axios.post(API_URL, formData)
                 setLocations(prev => [...prev, formData]);
             }
             setIsDialogOpen(false);
@@ -89,7 +102,7 @@ const LocationManagement = () => {
 
     const handleDelete = async (property) => {
         try {
-            await axios.delete(`https://api.standwithnahaloz.com/api/locations/${property._id}`)
+            await axios.delete(`${API_URL}/${property._id}`)
             setLocations(prev => prev.filter(p => p !== property));
         } catch (error) {
             console.error('Error deleting property:', error);
@@ -114,7 +127,7 @@ const LocationManagement = () => {
             raisedAmount: 0,
             details: '',
             coordinates: { x: '', y: '' },
-            imagesUrl: ['']
+            coverImagesUrl: ''
         });
     };
 
@@ -137,6 +150,7 @@ const LocationManagement = () => {
                             <thead>
                             <tr style={{backgroundColor: '#f5f5f5'}}>
                                 <th style={{padding: '1rem', textAlign: 'left'}}>Title</th>
+                                <th style={{padding: '1rem', textAlign: 'left'}}>Img</th>
                                 <th style={{padding: '1rem', textAlign: 'left'}}>Category Name</th>
                                 <th style={{padding: '1rem', textAlign: 'left'}}>Size</th>
                                 <th style={{padding: '1rem', textAlign: 'left'}}>Raised Amount</th>
@@ -149,6 +163,7 @@ const LocationManagement = () => {
                             {properties.map((property, index) => (
                                 <tr key={index} style={{borderTop: '1px solid #e0e0e0'}}>
                                     <td style={{padding: '1rem'}}>{property.title}</td>
+                                    <td style={{padding: '1rem'}}>{property.coverImagesUrl || 'Missing'}</td>
                                     <td style={{padding: '1rem'}}>{property.categoryName}</td>
                                     <td style={{padding: '1rem'}}>{`${property.size} ${property.sizeUnit}`}</td>
                                     <td style={{padding: '1rem'}}>{property.raisedAmount} / ${property.target} </td>
@@ -190,6 +205,13 @@ const LocationManagement = () => {
                             label="Title"
                             fullWidth
                             value={formData.title}
+                            onChange={handleInputChange}
+                        />
+                        <TextField
+                            name="coverImagesUrl"
+                            label="Cover Image url"
+                            fullWidth
+                            value={formData.coverImagesUrl}
                             onChange={handleInputChange}
                         />
                         <TextField

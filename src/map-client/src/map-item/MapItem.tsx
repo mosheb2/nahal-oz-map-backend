@@ -5,12 +5,8 @@ import { Hotspot } from '../data/hotspots';
 const PROGRESS_WIDTH = 456;
 
 // TODO: Use actual image once we have it
-const getPic = (pics: string[]) => {
-    return 'https://placehold.co/455x228';
-    // if (pics.length > 0) {
-    //     return pics[0];
-    // }
-    // return "";
+const getPic = (pic: string) => {
+    return pic || 'https://placehold.co/455x228';
 }
 
 export const MapItem: any = (proj: Hotspot) => {
@@ -39,7 +35,7 @@ export const MapItem: any = (proj: Hotspot) => {
                     <rect x="0.000976562" width={progressWidth} height="30" rx="15" fill="#8BDA6A"/>
                 </svg>
             </div>
-            <img src={getPic(proj.imagesUrl)} className="img-container" alt="Project img"/>
+            <img src={getPic(proj.coverImagesUrl)} className="img-container" alt="Project img"/>
             <div className="card-footer">
                 <button className="cta">
                     DONATE

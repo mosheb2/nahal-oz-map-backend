@@ -3,7 +3,7 @@ import './map.css';
 import { Hotspot } from '../../data/hotspots';
 import { MapItem } from "../../map-item/MapItem";
 
-const mapImage = 'https://api.standwithnahaloz.com/assets/nahal_oz_map-min.png';
+const mapImage = 'https://api.standwithnahaloz.com/assets/proj-images/nahal_oz_map.png';
 
 
 function getTooltipPositionClass(proj: Hotspot) {

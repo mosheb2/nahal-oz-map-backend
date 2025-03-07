@@ -1,7 +1,7 @@
 import React from 'react';
 import './map.css';
 import { Hotspot } from '../../data/hotspots';
-import { MapItem } from "../../map-item/MapItem";
+import { MapItem } from "../map-item/MapItem";
 
 const mapImage = 'https://api.standwithnahaloz.com/assets/proj-images/nahal_oz_map.png';
 

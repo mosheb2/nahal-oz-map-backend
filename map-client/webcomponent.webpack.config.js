@@ -4,7 +4,7 @@ module.exports = {
     entry: './src/WebComponentWrapper.tsx', // Path to your main TypeScript/React file
     output: {
         filename: 'nahal-oz-map-web-component.js',
-        path: path.resolve(__dirname, '../../public/dist'), // Output directory
+        path: path.resolve(__dirname, '../public/dist'), // Output directory
         library: 'SupplySandboxWebComponent', // Set library name for exposing the Web Component globally
         libraryTarget: 'umd', // Set library target as UMD
     },

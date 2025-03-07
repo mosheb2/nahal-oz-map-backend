@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(cors());
 app.use('/api/locations', locationRoutes);
 
-app.use('/assets',express.static(path.join(__dirname, '../public')));
+app.use('/assets',express.static(path.join(__dirname, '../../public')));
 
 
 app.get('/', (req,res)=> {

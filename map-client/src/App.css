@@ -7,14 +7,14 @@
   position: relative;
   overflow: hidden;
   width: calc(100vw - 70px);
-  height: calc(80vw + 20px);
+  height: calc(80vw + 140px);
 }
 
 /* Styles for screens 1550px and wider */
 @media (min-width: 1550px) {
   #map {
     width: 100%;
-    height: 1283px;
+    height: 1420px;
   }
 }
 

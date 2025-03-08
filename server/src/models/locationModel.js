@@ -7,50 +7,34 @@ const coordinatesSchema = new mongoose.Schema({
 }, { _id: false });
 
 const locationSchema = new mongoose.Schema({
-    size: {
-        type: Number,
-        required: true
-    },
-    sizeUnit: {
+    title: {
         type: String,
         required: true,
-        enum: ['sqft', 'sqm', 'acres', 'hectares']
+    },
+    details: {
+        type: String,
+        required: true
     },
     categoryName: {
         type: String,
         required: true,
         enum: ['youth', 'agriculture', 'community','education','other']
     },
-    target:{
-        type: Number,
-
-        required: true,
-        min: 0,
-    },
+    coverImagesUrl: { type: String, required: true },
+    size: { type: Number, },
+    sizeUnit: { type: String, enum: ['sqft', 'sqm', 'acres', 'hectares'] },
+    coordinates: { type: coordinatesSchema },
+    target:{ type: Number, required: true, min: 0, },
     raisedAmount: {
         type: Number,
         default: 0, //TODO: should be always lower or equal to target
+        min: 0,
     },
-    title: {
-        type: String,
-        required: true,
-    },
-    targetCurrency: {
-        type: String,
-        required: true,
-        default: 'USD'
-    },
-    details: {
-        type: String,
-        required: true
-    },
-    coordinates: { type: coordinatesSchema, required: true },
-    coverImagesUrl: { type: String, required: true },
-    deleted: {
-        type: Boolean,
-        default: false,
-        required: true
-    }
+    donorsCount: { type: Number, default: 0, min: 0 },
+    targetCurrency: { type: String, default: 'USD' },
+    projPageLinkUrl: { type: String, required: true },
+    donatePageLinkUrl: { type: String, required: true },
+    deleted: { type: Boolean, default: false }
 }, {
     timestamps: true
 });

@@ -1,20 +1,27 @@
 const locationService = require('../services/locationService');
 
 const addLocation = async (req,res) => {
-    const { size, sizeUnit, target, details, coordinates, coverImagesUrl, targetCurrency, title, raisedAmount, donorsCount, categoryName } = req.body;
+    const {
+        title, details, categoryName, coverImagesUrl,
+        size, sizeUnit, coordinates,
+        target, targetCurrency, raisedAmount, donorsCount,
+        projPageLinkUrl, donatePageLinkUrl,
+    } = req.body;
 
     const location = {
         title,
+        details,
+        categoryName,
+        coverImagesUrl,
         size,
         sizeUnit,
-        details,
         coordinates,
-        coverImagesUrl,
         target,
         targetCurrency,
         raisedAmount,
         donorsCount,
-        categoryName
+        projPageLinkUrl,
+        donatePageLinkUrl,
     }
 
     const createdLocation = await locationService.addLocation(location)
@@ -71,20 +78,27 @@ const updateRaisedAmount = async (req, res) => {
 
 const updateLocation = async (req,res) => {
     const { locationId } = req.params;
-    const { size, sizeUnit, target, details, coordinates, coverImagesUrl, targetCurrency, title, raisedAmount, categoryName } = req.body;
+    const {
+        title, details, categoryName, coverImagesUrl,
+        size, sizeUnit, coordinates,
+        target, targetCurrency, raisedAmount, donorsCount,
+        projPageLinkUrl, donatePageLinkUrl,
+    } = req.body;
 
     const location = {
         title,
+        details,
+        categoryName,
+        coverImagesUrl,
         size,
         sizeUnit,
-        details,
         coordinates,
-        coverImagesUrl,
         target,
         targetCurrency,
         raisedAmount,
         donorsCount,
-        categoryName
+        projPageLinkUrl,
+        donatePageLinkUrl,
     }
     const wasUpdated = await locationService.updateLocation(locationId, location);
 

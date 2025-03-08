@@ -23,17 +23,16 @@ const LocationManagement = () => {
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [currentLocation, setCurrentLocation] = useState(null);
     const [formData, setFormData] = useState({
-        size: '',
-        sizeUnit: 'sqft',
-        target: '',
-        targetCurrency: 'USD',
-        categoryName: '',
-        raisedAmount: 0,
-        donorsCount: 0,
         title: '',
         details: '',
-        coordinates: { x: '', y: '' },
-        coverImagesUrl: ''
+        categoryName: '',
+        coverImagesUrl: '',
+        coordinates: { x: 0, y: 0 },
+        target: 1000000,
+        raisedAmount: 0,
+        donorsCount: 0,
+        projPageLinkUrl: '',
+        donatePageLinkUrl: '',
     });
 
     useEffect(() => {
@@ -119,16 +118,16 @@ const LocationManagement = () => {
     const resetForm = () => {
         setCurrentLocation(null);
         setFormData({
-            size: '',
-            sizeUnit: 'sqft',
-            target: '',
-            targetCurrency: 'USD',
             title: '',
-            categoryName: '',
-            raisedAmount: 0,
             details: '',
-            coordinates: { x: '', y: '' },
-            coverImagesUrl: ''
+            categoryName: '',
+            coverImagesUrl: '',
+            coordinates: { x: 50, y: 50 },
+            target: 1000000,
+            raisedAmount: 0,
+            donorsCount: 0,
+            projPageLinkUrl: '',
+            donatePageLinkUrl: '',
         });
     };
 
@@ -151,13 +150,14 @@ const LocationManagement = () => {
                             <thead>
                             <tr style={{backgroundColor: '#f5f5f5'}}>
                                 <th style={{padding: '1rem', textAlign: 'left'}}>Title</th>
-                                <th style={{padding: '1rem', textAlign: 'left'}}>Img</th>
+                                <th style={{padding: '1rem', textAlign: 'left'}}>Details</th>
                                 <th style={{padding: '1rem', textAlign: 'left'}}>Category Name</th>
-                                <th style={{padding: '1rem', textAlign: 'left'}}>Size</th>
+                                <th style={{padding: '1rem', textAlign: 'left'}}>Img</th>
+                                <th style={{padding: '1rem', textAlign: 'left'}}>Map Location</th>
                                 <th style={{padding: '1rem', textAlign: 'left'}}>Raised Amount</th>
                                 <th style={{padding: '1rem', textAlign: 'left'}}>Donors Count</th>
-                                <th style={{padding: '1rem', textAlign: 'left'}}>Details</th>
-                                <th style={{padding: '1rem', textAlign: 'left'}}>Coordinates</th>
+                                <th style={{padding: '1rem', textAlign: 'left'}}>Project Page URL</th>
+                                <th style={{padding: '1rem', textAlign: 'left'}}>Donation Page URL</th>
                                 <th style={{padding: '1rem', textAlign: 'left'}}>Actions</th>
                             </tr>
                             </thead>
@@ -165,11 +165,6 @@ const LocationManagement = () => {
                             {properties.map((property, index) => (
                                 <tr key={index} style={{borderTop: '1px solid #e0e0e0'}}>
                                     <td style={{padding: '1rem'}}>{property.title}</td>
-                                    <td style={{padding: '1rem'}}>{property.coverImagesUrl || 'Missing'}</td>
-                                    <td style={{padding: '1rem'}}>{property.categoryName}</td>
-                                    <td style={{padding: '1rem'}}>{`${property.size} ${property.sizeUnit}`}</td>
-                                    <td style={{padding: '1rem'}}>{property.raisedAmount} / ${property.target} </td>
-
                                     <td style={{
                                         padding: '1rem',
                                         maxWidth: '200px',
@@ -179,7 +174,14 @@ const LocationManagement = () => {
                                     }}>
                                         {property.details}
                                     </td>
-                                    <td style={{padding: '1rem'}}>{`(${property.coordinates.x}, ${property.coordinates.y})`}</td>
+                                    <td style={{padding: '1rem'}}>{property.categoryName}</td>
+                                    <td style={{padding: '1rem'}}>{property.coverImagesUrl || 'Missing'}</td>
+                                    <td style={{padding: '1rem'}}>{`(${property.coordinates.x}%, ${property.coordinates.y}%)`}</td>
+                                    <td style={{padding: '1rem'}}>${property.raisedAmount} / ${property.target} </td>
+                                    <td style={{padding: '1rem'}}>{property.donorsCount}</td>
+                                    <td style={{padding: '1rem'}}>{property.projPageLinkUrl}</td>
+                                    <td style={{padding: '1rem'}}>{property.donatePageLinkUrl}</td>
+
                                     <td style={{padding: '1rem'}}>
                                         <IconButton color="primary" onClick={() => handleEdit(property)}>
                                             <EditIcon/>
@@ -219,13 +221,6 @@ const LocationManagement = () => {
                             onChange={handleInputChange}
                         />
                         <TextField
-                            name="coverImagesUrl"
-                            label="Cover Image url"
-                            fullWidth
-                            value={formData.coverImagesUrl}
-                            onChange={handleInputChange}
-                        />
-                        <TextField
                             select
                             name="categoryName"
                             label="Category Name"
@@ -240,11 +235,24 @@ const LocationManagement = () => {
                             ))}
                         </TextField>
                         <TextField
-                            name="size"
-                            label="Size"
-                            type="number"
+                            name="coverImagesUrl"
+                            label="Cover Image url"
                             fullWidth
-                            value={formData.size}
+                            value={formData.coverImagesUrl}
+                            onChange={handleInputChange}
+                        />
+                        <TextField
+                            name="coordinates.x"
+                            label="Latitude"
+                            fullWidth
+                            value={formData.coordinates.x}
+                            onChange={handleInputChange}
+                        />
+                        <TextField
+                            name="coordinates.y"
+                            label="Longitude"
+                            fullWidth
+                            value={formData.coordinates.y}
                             onChange={handleInputChange}
                         />
                         <TextField
@@ -273,17 +281,17 @@ const LocationManagement = () => {
                             onChange={handleInputChange}
                         />
                         <TextField
-                            name="coordinates.x"
-                            label="Latitude"
+                            name="projPageLinkUrl"
+                            label="Project Page URL"
                             fullWidth
-                            value={formData.coordinates.x}
+                            value={formData.projPageLinkUrl}
                             onChange={handleInputChange}
                         />
                         <TextField
-                            name="coordinates.y"
-                            label="Longitude"
+                            name="donatePageLinkUrl"
+                            label="Donate Page URL"
                             fullWidth
-                            value={formData.coordinates.y}
+                            value={formData.donatePageLinkUrl}
                             onChange={handleInputChange}
                         />
                     </div>

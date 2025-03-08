@@ -3,8 +3,8 @@ import './map-item.css';
 import { Hotspot } from '../../data/hotspots';
 
 const PROGRESS_WIDTH = 456;
+const DEFAULT_LINK = 'https://standwithnahaloz.com/';
 
-// TODO: Use actual image once we have it
 const getPic = (pic: string) => {
     return pic || 'https://placehold.co/455x228';
 }
@@ -48,10 +48,10 @@ export const MapItem: any = (proj: Hotspot) => {
             </div>
             <img src={getPic(proj.coverImagesUrl)} className="img-container" alt="Project img"/>
             <div className="card-footer">
-                <button className="cta">
+                <button className="cta" onClick={() => window.location.href = proj.donatePageLinkUrl || DEFAULT_LINK}>
                     DONATE
                 </button>
-                <button className="cta black-cta">
+                <button className="cta black-cta" onClick={() => window.location.href = proj.projPageLinkUrl || DEFAULT_LINK}>
                     LEARN MORE
                 </button>
             </div>

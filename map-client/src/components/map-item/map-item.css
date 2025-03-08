@@ -1,5 +1,6 @@
 
 .project-card {
+    cursor: default;
     width: 516px; /* Set a fixed height for the card */
     border-radius: 30px;
     border: 2px solid #FFFEF3;
@@ -90,6 +91,7 @@ p.description {
 
 
 button.cta {
+    cursor: pointer;
     background-color: #FFE971; /* Green */
     border: none;
     color: black;

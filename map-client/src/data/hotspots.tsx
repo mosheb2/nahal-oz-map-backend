@@ -16,7 +16,8 @@ export interface Hotspot {
     raisedAmount: number,
     target: number,
     donorsCount: number,
-    targetCurrency: string
+    projPageLinkUrl: string,
+    donatePageLinkUrl: string,
 }
 
 export default {
@@ -32,7 +33,8 @@ export default {
             raisedAmount: p.raisedAmount,
             target: p.target,
             donorsCount: p.donorsCount,
-            targetCurrency: p.targetCurrency
+            projPageLinkUrl: p.projPageLinkUrl,
+            donatePageLinkUrl: p.donatePageLinkUrl,
         }));
     }
 }

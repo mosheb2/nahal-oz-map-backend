@@ -9,6 +9,16 @@ const getPic = (pic: string) => {
     return pic || 'https://placehold.co/455x228';
 }
 
+function formatNumberWithKMB(num: number = 0) {
+    if (Math.abs(num) >= 1000000) {
+        return (num / 1000000).toFixed(1) + 'M';
+    } else if (Math.abs(num) >= 1000) {
+        return (num / 1000).toFixed(1) + 'K';
+    } else {
+        return num.toLocaleString('en-US');
+    }
+}
+
 export const MapItem: any = (proj: Hotspot) => {
     const progressWidth = Math.max(40, proj.raisedAmount / proj.target * PROGRESS_WIDTH);
 
@@ -24,10 +34,11 @@ export const MapItem: any = (proj: Hotspot) => {
                 <rect opacity="0.3" x="0.000976562" width="456" height="1" fill="white"/>
             </svg>
             <div className="raised">
-                {`$${proj.raisedAmount} raised`}
+                {`$${proj.raisedAmount.toLocaleString('en-US')} raised`}
             </div>
             <div className="budget-goal">
-                {`$${proj.target} goal`} <div className="dot"></div>  1K donations
+                {`$${proj.target.toLocaleString('en-US')} goal`} <div className="dot"></div>
+                {' '}{formatNumberWithKMB(proj.donorsCount)} donations
             </div>
             <div className="progress-bar">
                 <svg width={PROGRESS_WIDTH} height="30" viewBox={`0 0 ${PROGRESS_WIDTH} 30`} fill="none" xmlns="http://www.w3.org/2000/svg">

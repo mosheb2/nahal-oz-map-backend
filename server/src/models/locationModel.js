@@ -19,7 +19,7 @@ const locationSchema = new mongoose.Schema({
     categoryName: {
         type: String,
         required: true,
-        enum: ['all', 'youth', 'agriculture', 'community','education']
+        enum: ['youth', 'agriculture', 'community','education','other']
     },
     target:{
         type: Number,

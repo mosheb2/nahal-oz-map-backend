@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
     Button,
     TextField,
@@ -17,7 +17,7 @@ import axios from 'axios'
 const API_URL = `${import.meta.env.VITE_API_URL || 'https://api.standwithnahaloz.com'}/api/locations`;
 
 const LocationManagement = () => {
-    const categories = ['all', 'youth', 'agriculture', 'community','education'];
+    const categories = ['youth', 'agriculture', 'community','education', 'other'];
 
     const [properties, setLocations] = useState([]);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -29,6 +29,7 @@ const LocationManagement = () => {
         targetCurrency: 'USD',
         categoryName: '',
         raisedAmount: 0,
+        donorsCount: 0,
         title: '',
         details: '',
         coordinates: { x: '', y: '' },
@@ -154,6 +155,7 @@ const LocationManagement = () => {
                                 <th style={{padding: '1rem', textAlign: 'left'}}>Category Name</th>
                                 <th style={{padding: '1rem', textAlign: 'left'}}>Size</th>
                                 <th style={{padding: '1rem', textAlign: 'left'}}>Raised Amount</th>
+                                <th style={{padding: '1rem', textAlign: 'left'}}>Donors Count</th>
                                 <th style={{padding: '1rem', textAlign: 'left'}}>Details</th>
                                 <th style={{padding: '1rem', textAlign: 'left'}}>Coordinates</th>
                                 <th style={{padding: '1rem', textAlign: 'left'}}>Actions</th>
@@ -208,6 +210,15 @@ const LocationManagement = () => {
                             onChange={handleInputChange}
                         />
                         <TextField
+                            name="details"
+                            label="Details"
+                            multiline
+                            rows={4}
+                            fullWidth
+                            value={formData.details}
+                            onChange={handleInputChange}
+                        />
+                        <TextField
                             name="coverImagesUrl"
                             label="Cover Image url"
                             fullWidth
@@ -254,12 +265,11 @@ const LocationManagement = () => {
                             onChange={handleInputChange}
                         />
                         <TextField
-                            name="details"
-                            label="Details"
-                            multiline
-                            rows={4}
+                            name="donorsCount"
+                            label="Donors Count"
+                            type="number"
                             fullWidth
-                            value={formData.details}
+                            value={formData.donorsCount}
                             onChange={handleInputChange}
                         />
                         <TextField

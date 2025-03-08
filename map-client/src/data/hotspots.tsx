@@ -15,6 +15,7 @@ export interface Hotspot {
     },
     raisedAmount: number,
     target: number,
+    donorsCount: number,
     targetCurrency: string
 }
 
@@ -30,6 +31,7 @@ export default {
             coordinates: p.coordinates,
             raisedAmount: p.raisedAmount,
             target: p.target,
+            donorsCount: p.donorsCount,
             targetCurrency: p.targetCurrency
         }));
     }

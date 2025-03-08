@@ -26,7 +26,7 @@ function App() {
 
     }, []);
     return (
-        <div className="App">
+        <div className="App" id="map">
           <InteractiveMap projects={projects}/>
         </div>
     );

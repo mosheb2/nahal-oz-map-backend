@@ -7,30 +7,6 @@
     }
 }
 
-#map {
-    position: relative;
-    overflow: hidden;
-    width: calc(100vw - 70px);
-    height: calc(80vw + 20px);
-}
-
-/* Styles for screens 1550px and wider */
-@media (min-width: 1550px) {
-    #map {
-        width: 100%;
-        height: 1283px;
-    }
-}
-
-
-@media (max-width: 768px){
-    #map {
-        width: calc(100vw - 100px);
-        height: calc(80vw - 40px);
-    }
-}
-
-
 #map-wrapper {
     position: absolute;
     top: 0;
@@ -39,7 +15,7 @@
     height: 100%;
 }
 
-#map img.map-bg {
+#map-wrapper img.map-bg {
     position: absolute;
     z-index: -1;
     top: 0;

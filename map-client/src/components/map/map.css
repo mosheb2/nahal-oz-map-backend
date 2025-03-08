@@ -12,12 +12,12 @@
     top: 120px;
     left: 0;
     width: 100%;
-    height: calc(100% - 120px);
+    height: calc(100% - 250px);
 }
 
 #map-wrapper img.map-bg {
     position: absolute;
-    z-index: -1;
+    z-index: 0;
     top: 0;
     left: 0;
     width: 100%;
@@ -61,6 +61,7 @@
     padding: 12px 22px;
     display: inline-block;
     height: 80px;
+    min-width: 130px;
     line-height: 56px;
     border-radius: 15px;
     margin: 0 10px;
@@ -113,4 +114,37 @@
 .map-marker:hover .marker-campaign {
     display: block;
     animation: fadeIn 0.2s ease-in-out forwards;
+}
+
+.total-progress-bar {
+    position: absolute;
+    text-align: left;
+    bottom: 0;
+    width: 100%;
+    /*height: 120px;*/
+}
+
+.total-progress-bar h2 {
+    font-size: 31px;
+    font-family: 'Roboto', sans-serif;
+    color: #333333;
+    margin: 0 0 10px 0;
+}
+
+.total-progress-bar h4 {
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    color: #333333;
+    opacity: 0.6;
+    margin: 0 0 30px 0;
+}
+
+.total-progress-bar .dot {
+    width: 5px;
+    height: 6px;
+    background: #333333;
+    opacity: 0.6;
+    border-radius: 3px;
+    display: inline-block;
+    margin: 4px 7px 3px;
 }

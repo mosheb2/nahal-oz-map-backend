@@ -1,5 +1,5 @@
 const Location = require('../models/locationModel');
-const { Types } = require("mongoose");
+const { Types } = require('mongoose');
 
 const addLocation = async(location) => {
     const newLocation = new Location(location);

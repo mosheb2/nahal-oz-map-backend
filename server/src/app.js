@@ -17,7 +17,7 @@ app.use('/assets/dist/bo-client/*', auth);
 app.use('/assets',express.static(path.join(__dirname, '../../public')));
 
 app.get('/', (req,res)=> {
-    res.send('Server is running');
+    res.send('Server is running!!!');
 })
 
 app.use((err, req, res, next) => {

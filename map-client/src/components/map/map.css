@@ -42,10 +42,12 @@
     opacity: 0.8;
     background-color: #989898;
     border: #171717 solid 10px;
+    cursor: not-allowed;
 }
 
 .filters-bar {
     display: flex;
+    overflow: auto;
 }
 
 .filter-btn {
@@ -61,7 +63,6 @@
     padding: 12px 22px;
     display: inline-block;
     height: 80px;
-    min-width: 130px;
     line-height: 56px;
     border-radius: 15px;
     margin: 0 10px;
@@ -107,11 +108,13 @@
     left: initial;
 }
 
-.map-marker:hover {
+/*.map-marker:hover, */
+.map-marker.project-in-focus {
     z-index: 10;
 }
 
-.map-marker:hover .marker-campaign {
+/*.map-marker:not(.not-active):hover .marker-campaign, */
+.map-marker:not(.not-active).project-in-focus .marker-campaign {
     display: block;
     animation: fadeIn 0.2s ease-in-out forwards;
 }

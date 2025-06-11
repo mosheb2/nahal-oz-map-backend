@@ -46,6 +46,7 @@ function getTotalProgress(projects: Hotspot[]) {
 export function InteractiveMap ({ projects }:{ projects:Hotspot[]} ) {
     const [selectedCategory, setCategory] = useState(DEFAULT_CATEGORY);
     const [totalProgress, setTotalProgress] = useState({ totalTarget: 0, totalRaised: 0, totalDonors: 0 });
+    const [projectInFocus, setProjectInFocus] = useState<string | null>(null);
     const progressWidth = totalProgress.totalTarget === 0 ? 40 : Math.max(40, totalProgress.totalRaised / totalProgress.totalTarget * PROGRESS_WIDTH);
 
     if (totalProgress.totalTarget === 0 && projects.length > 0) {
@@ -101,8 +102,9 @@ export function InteractiveMap ({ projects }:{ projects:Hotspot[]} ) {
                     return (
                         <div
                             key={proj._id}
-                            className={`map-marker ${getMyCategoryClass(proj.categoryName)}`}
+                            className={`map-marker ${getMyCategoryClass(proj.categoryName)}${proj._id === projectInFocus ? ' project-in-focus' : ''}`}
                             style={{top: `${proj.coordinates.y}%`, left: `${proj.coordinates.x}%`}}
+                            onClick={() => proj._id === projectInFocus ? setProjectInFocus(null) : setProjectInFocus(proj._id)}
                         >
                             <div className={`marker-campaign ${getTooltipPositionClass(proj)}`}>
                                 <MapItem {...proj}/>

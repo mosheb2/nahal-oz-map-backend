@@ -24,6 +24,15 @@ export const MapItem: any = (proj: Hotspot) => {
 
     return (
         <div className="project-card">
+            <button
+                className="close-button"
+                onClick={(e) => {
+                    e.stopPropagation();
+                    window.location.hash = '';
+                }}
+            >
+                ✕
+            </button>
             <h2 className="title">
                 {proj.title}
             </h2>
@@ -48,10 +57,20 @@ export const MapItem: any = (proj: Hotspot) => {
             </div>
             <img src={getPic(proj.coverImagesUrl)} className="img-container" alt="Project img"/>
             <div className="card-footer">
-                <button className="cta" onClick={() => window.location.href = proj.donatePageLinkUrl || DEFAULT_LINK}>
+                <button
+                    className="cta"
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        window.open(proj.donatePageLinkUrl || DEFAULT_LINK, '_blank');
+                    }}>
                     DONATE
                 </button>
-                <button className="cta black-cta" onClick={() => window.location.href = proj.projPageLinkUrl || DEFAULT_LINK}>
+                <button
+                    className="cta black-cta"
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        window.location.href = proj.projPageLinkUrl || DEFAULT_LINK;
+                    }}>
                     LEARN MORE
                 </button>
             </div>

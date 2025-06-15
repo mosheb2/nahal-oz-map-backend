@@ -19,20 +19,20 @@ function formatNumberWithKMB(num: number = 0) {
     }
 }
 
-export const MapItem: any = (proj: Hotspot) => {
+export const MapItem = ({ proj, onClose = () => { console.log('close') }}: { proj: Hotspot, onClose?: () => void }) => {
     const progressWidth = Math.max(40, proj.raisedAmount / proj.target * PROGRESS_WIDTH);
 
     return (
         <div className="project-card">
-            <button
+            <div
                 className="close-button"
                 onClick={(e) => {
                     e.stopPropagation();
-                    window.location.hash = '';
+                    onClose();
                 }}
             >
                 ✕
-            </button>
+            </div>
             <h2 className="title">
                 {proj.title}
             </h2>

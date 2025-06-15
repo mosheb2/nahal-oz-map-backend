@@ -107,7 +107,7 @@ export function InteractiveMap ({ projects }:{ projects:Hotspot[]} ) {
                             onClick={() => proj._id === projectInFocus ? setProjectInFocus(null) : setProjectInFocus(proj._id)}
                         >
                             <div className={`marker-campaign ${getTooltipPositionClass(proj)}`}>
-                                <MapItem {...proj}/>
+                                <MapItem proj={proj} onClose={() => setProjectInFocus(null)}/>
                             </div>
                         </div>
                     )

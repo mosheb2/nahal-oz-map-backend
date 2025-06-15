@@ -17,20 +17,6 @@ function formatNumberWithKMB(num: number = 0) {
     }
 }
 
-function getTooltipPositionClass(proj: Hotspot) {
-    let posClassname = '';
-
-    if (proj.coordinates.y < 50) {
-        posClassname += 'bottom'
-    }
-
-    if (proj.coordinates.x > 50) {
-        posClassname += ' left';
-    }
-
-    return posClassname;
-}
-
 function getTotalProgress(projects: Hotspot[]) {
     return projects.reduce(
         (sum, proj) => {
@@ -46,7 +32,7 @@ function getTotalProgress(projects: Hotspot[]) {
 export function InteractiveMap ({ projects }:{ projects:Hotspot[]} ) {
     const [selectedCategory, setCategory] = useState(DEFAULT_CATEGORY);
     const [totalProgress, setTotalProgress] = useState({ totalTarget: 0, totalRaised: 0, totalDonors: 0 });
-    const [projectInFocus, setProjectInFocus] = useState<string | null>(null);
+    const [projectInFocus, setProjectInFocus] = useState<Hotspot | null>(null);
     const progressWidth = totalProgress.totalTarget === 0 ? 40 : Math.max(40, totalProgress.totalRaised / totalProgress.totalTarget * PROGRESS_WIDTH);
 
     if (totalProgress.totalTarget === 0 && projects.length > 0) {
@@ -102,16 +88,20 @@ export function InteractiveMap ({ projects }:{ projects:Hotspot[]} ) {
                     return (
                         <div
                             key={proj._id}
-                            className={`map-marker ${getMyCategoryClass(proj.categoryName)}${proj._id === projectInFocus ? ' project-in-focus' : ''}`}
+                            className={`map-marker ${getMyCategoryClass(proj.categoryName)}`}
                             style={{top: `${proj.coordinates.y}%`, left: `${proj.coordinates.x}%`}}
-                            onClick={() => proj._id === projectInFocus ? setProjectInFocus(null) : setProjectInFocus(proj._id)}
-                        >
-                            <div className={`marker-campaign ${getTooltipPositionClass(proj)}`}>
-                                <MapItem proj={proj} onClose={() => setProjectInFocus(null)}/>
-                            </div>
-                        </div>
+                            onClick={() => projectInFocus && proj._id === projectInFocus._id ? setProjectInFocus(null) : setProjectInFocus(proj)}
+                        />
                     )
                 })}
+                {projectInFocus &&
+                    <div className="marker-campaign">
+                        <MapItem
+                            proj={projects.find((proj) => proj._id === projectInFocus._id) as Hotspot}
+                            onClose={() => setProjectInFocus(null)}
+                        />
+                    </div>
+                }
             </div>
             <div className="total-progress-bar">
                 <h2>${totalProgress.totalRaised.toLocaleString('en-US')} raised</h2>

@@ -20,7 +20,7 @@ function formatNumberWithKMB(num: number = 0) {
 }
 
 export const MapItem = ({ proj, onClose = () => { console.log('close') }}: { proj: Hotspot, onClose?: () => void }) => {
-    const progressWidth = Math.max(40, proj.raisedAmount / proj.target * PROGRESS_WIDTH);
+    const progressWidth = Math.min(Math.max(40, proj.raisedAmount / proj.target * PROGRESS_WIDTH), 100);
 
     return (
         <div className="project-card">
@@ -55,7 +55,17 @@ export const MapItem = ({ proj, onClose = () => { console.log('close') }}: { pro
                     <rect x="0.000976562" width={progressWidth} height="30" rx="15" fill="#8BDA6A"/>
                 </svg>
             </div>
-            <img src={getPic(proj.coverImagesUrl)} className="img-container" alt="Project img"/>
+            <div className="img-wrapper">
+                <img src={getPic(proj.coverImagesUrl)} className="img-container" alt="Project img">
+                </img>
+
+                {
+                    progressWidth === 100 ?
+                        <div className="funded-wrapper">
+                            <img src="https://ik.imagekit.io/0wjkxra9o/funded" alt="funded"/>
+                        </div> : null
+                }
+            </div>
             <div className="card-footer">
                 <button
                     className="cta"

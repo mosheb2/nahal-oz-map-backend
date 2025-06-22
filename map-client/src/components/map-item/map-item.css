@@ -85,9 +85,27 @@
     margin-top: 10px;
 }
 
+.project-card .img-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
 .project-card .img-container {
+    width: 100%;
     margin-top: 10px;
     border-radius: 8px;
+}
+
+.project-card .funded-wrapper {
+    position: absolute;
+    top: calc(5% + 8px);
+    left: 3%;
+    width: 40%;
+}
+
+.project-card .funded-wrapper img {
+    width: 100%;
+    filter: drop-shadow(5px 5px 3px rgba(0, 0, 0, 0.9))
 }
 
 .project-card .card-footer {

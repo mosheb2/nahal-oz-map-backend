@@ -21,8 +21,8 @@
 
 @media (max-width: 768px){
   #map {
-    width: calc(100vw - 100px);
-    height: calc(80vw + 210px);
+    width: calc(100vw - 50px);
+    height: calc(80vw + 400px);
   }
 }
 

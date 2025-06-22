@@ -45,6 +45,14 @@
     cursor: not-allowed;
 }
 
+@media (max-width: 768px) {
+    .map-marker {
+        width: 20px;
+        height: 20px;
+        border: black solid 6px;
+    }
+}
+
 .filters-bar {
     display: flex;
     overflow: auto;
@@ -76,6 +84,18 @@
     margin-right: 0;
 }
 
+@media (max-width: 768px) {
+    .filter-btn {
+        font-size: 20px;
+        padding: 8px 16px;
+        display: inline-block;
+        height: 50px;
+        line-height: 26px;
+        border-radius: 10px;
+        margin: 0 10px;
+    }
+}
+
 .community-bg {
     background-color: #FFE971;
 }
@@ -95,6 +115,12 @@
     top: 40% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
+}
+
+@media (max-width: 768px) {
+    .marker-campaign {
+        zoom: 60%;
+    }
 }
 
 .total-progress-bar {

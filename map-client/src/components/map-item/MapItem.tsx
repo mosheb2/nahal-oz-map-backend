@@ -31,7 +31,7 @@ export const MapItem = ({ proj, onClose = () => { console.log('close') }}: { pro
                     onClose();
                 }}
             >
-                ✕
+                x
             </div>
             <h2 className="title">
                 {proj.title}

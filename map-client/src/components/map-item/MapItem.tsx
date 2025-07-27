@@ -19,11 +19,20 @@ function formatNumberWithKMB(num: number = 0) {
     }
 }
 
-export const MapItem: any = (proj: Hotspot) => {
-    const progressWidth = Math.max(40, proj.raisedAmount / proj.target * PROGRESS_WIDTH);
+export const MapItem = ({ proj, onClose = () => { console.log('close') }}: { proj: Hotspot, onClose?: () => void }) => {
+    const progressWidth = Math.min(Math.max(40, proj.raisedAmount / proj.target * PROGRESS_WIDTH), PROGRESS_WIDTH);
 
     return (
         <div className="project-card">
+            <div
+                className="close-button"
+                onClick={(e) => {
+                    e.stopPropagation();
+                    onClose();
+                }}
+            >
+                x
+            </div>
             <h2 className="title">
                 {proj.title}
             </h2>
@@ -46,12 +55,32 @@ export const MapItem: any = (proj: Hotspot) => {
                     <rect x="0.000976562" width={progressWidth} height="30" rx="15" fill="#8BDA6A"/>
                 </svg>
             </div>
-            <img src={getPic(proj.coverImagesUrl)} className="img-container" alt="Project img"/>
+            <div className="img-wrapper">
+                <img src={getPic(proj.coverImagesUrl)} className="img-container" alt="Project img">
+                </img>
+
+                {
+                    progressWidth === PROGRESS_WIDTH ?
+                        <div className="funded-wrapper">
+                            <img src="https://ik.imagekit.io/0wjkxra9o/funded" alt="funded"/>
+                        </div> : null
+                }
+            </div>
             <div className="card-footer">
-                <button className="cta" onClick={() => window.location.href = proj.donatePageLinkUrl || DEFAULT_LINK}>
+                <button
+                    className="cta"
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        window.open(proj.donatePageLinkUrl || DEFAULT_LINK, '_blank');
+                    }}>
                     DONATE
                 </button>
-                <button className="cta black-cta" onClick={() => window.location.href = proj.projPageLinkUrl || DEFAULT_LINK}>
+                <button
+                    className="cta black-cta"
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        window.location.href = proj.projPageLinkUrl || DEFAULT_LINK;
+                    }}>
                     LEARN MORE
                 </button>
             </div>

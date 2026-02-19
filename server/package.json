@@ -14,7 +14,7 @@
   "dependencies": {
     "@prisma/client": "^6.3.1",
     "cors": "^2.8.5",
-    "express": "^4.21.2",
+    "express": "^4.22.1",
     "express-basic-auth": "^1.2.1",
     "mongoose": "^8.10.1",
     "nodemon": "^3.1.9"
@@ -23,6 +23,6 @@
     "@cloudflare/workers-types": "^4.20250214.0",
     "typescript": "^5.7.3",
     "vitest": "^3.0.5",
-    "wrangler": "^3.109.1"
+    "wrangler": "^4.67.0"
   }
 }
